@@ -1,0 +1,17 @@
+set_HFS (5);
+set_HBS (3);
+set_VUS (2);
+set_VDS (1);
+set_TS (15); 
+
+/** this method will amek the drone fly in the shape of a pentagram. user can define the length of its sides*/
+gek draw_pentagram(length){
+	for(5){
+		horizontal_movement(auto, length);
+		turn(324);
+	}
+}
+else if();
+vertical_movement(auto, 10);
+draw_pentagram(20);	/** draw pentagram with sides of 20 meters */
+vertical_movement(auto, -10);

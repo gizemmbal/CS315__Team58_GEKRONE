@@ -1,0 +1,41 @@
+set_HFS (5);
+set_HBS (3);
+set_VUS (2);
+set_VDS (1);
+set_TS (15);
+/** setting the constant speeds */
+
+can_fly = read_tank() >= 1 && read_temperature () < 35; /**checking if the drone has good condition to fly */
+
+gek emergency_landing(){
+	a = read_altitude();
+	b = a * -1;
+	vertical_movement(auto, b);
+}
+
+while(can_fly){
+	vertical_movement(manual, 2.5, 2); /**start flying */
+	nozzle(1);
+	for (5){
+		if(read_battery < 25){
+			emergency_landing();
+		} /** if battery is low, land */
+		
+		horizontal_movement(auto, 25);
+		turn(90);
+		horizontal_movement(auto, 5);
+		turn(90);
+		horizontal_movement(auto, 25);
+		turn(-90);
+		horizontal_movement(auto, 5);
+		turn(-90);
+	}
+}
+nozzle(0);
+turn(180);
+horizontal_movement(auto, 25);
+vertical_movement(auto, -5); /**landing*/
+
+if(read_battery < 25){
+	emergency_landing();
+} /** if battery is low, land */
